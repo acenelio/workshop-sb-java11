@@ -1,26 +1,20 @@
 package com.educandoweb.course.services;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import com.educandoweb.course.entities.Category;
 import com.educandoweb.course.repositories.CategoryRepository;
 
 @Service
-public class CategoryService {
+public class CategoryService implements CRUDService<Category, Long> {
 
 	@Autowired
 	private CategoryRepository repository;
 	
-	public List<Category> findAll() {
-		return repository.findAll();
-	}
-	
-	public Category find(long id) {
-		Optional<Category> result = repository.findById(id);
-		return result.get();
+	@Override
+	public JpaRepository<Category, Long> getRepository() {
+		return repository;
 	}
 }
